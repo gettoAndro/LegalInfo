@@ -60,4 +60,9 @@ class LegalInfo {
 
     suspend fun register(userId: String) = repository.register(userId)
 
+    suspend fun getDocuments(userId: String, type: DocumentType, customType: String? = null) =
+        repository.getDocuments(userId, type, customType)
+
+    fun showDocument()
+
 }

@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         binding.btnRegister.setOnClickListener {
             viewModel.register(binding.editUserId.text.toString())
         }
+
+        binding.btnGetDocuments.setOnClickListener {
+            viewModel.getDocuments(binding.editUrl.text.toString())
+        }
     }
 
 }

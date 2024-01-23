@@ -1,5 +1,6 @@
 package com.peakscircle.legalinfodemo.ui
 
+import com.peakscircle.legalinfo.DocumentType
 import com.peakscircle.legalinfo.LegalInfo
 import com.peakscircle.legalinfo.domain.NetworkResult
 import com.peakscircle.legalinfodemo.BuildConfig
@@ -15,15 +16,13 @@ class MainViewModel: BaseViewModel() {
 
     fun register(userId: String) {
         scope.launch {
-            Timber.d("REGISTER")
-            LegalInfo.getInstance().register(userId).let {
-                when(it) {
-                    is NetworkResult.Success -> {
-                        Timber.d("register SUCCESS")
-                    }
-                    is NetworkResult.Error -> Timber.e(it.exception)
-                }
-            }
+            LegalInfo.getInstance().register(userId)
+        }
+    }
+
+    fun getDocuments(userId: String) {
+        scope.launch {
+            LegalInfo.getInstance().getDocuments(userId, DocumentType.ALL)
         }
     }
 

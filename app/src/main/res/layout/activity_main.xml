@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Host Url"
-        android:text="https://31934ccb-4d27-4c26-8c2f-2948cfebce5c.mock.pstmn.io/documents/"
+        android:text="https://31934ccb-4d27-4c26-8c2f-2948cfebce5c.mock.pstmn.io/"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -35,5 +35,11 @@
         android:text="Register"
         app:layout_constraintTop_toBottomOf="@+id/editUserId" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnGetDocuments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Documents"
+        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
