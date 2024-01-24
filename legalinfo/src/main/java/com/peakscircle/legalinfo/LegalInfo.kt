@@ -72,7 +72,7 @@ class LegalInfo {
     suspend fun getDocuments(userId: String, type: DocumentType, customType: String? = null): NetworkResult<GetDocumentsResponseDTO> {
         if (userId.isBlank()) return NetworkResult.Error(WrongIdException())
         if (::api.isInitialized && ::repository.isInitialized) {
-            return repository.getDocuments(userId, type, customType)
+            return repository.getDocuments()
         }
 
         return NetworkResult.Error(NotConfiguredException())
