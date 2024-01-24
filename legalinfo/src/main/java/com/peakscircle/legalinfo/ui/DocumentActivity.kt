@@ -3,6 +3,12 @@ package com.peakscircle.legalinfo.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.webkit.WebChromeClient
+import android.webkit.WebViewClient
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.peakscircle.legalinfo.databinding.ActivityDocumentBinding
 import com.peakscircle.legalinfo.ui.utils.ext.show
@@ -37,14 +43,18 @@ class DocumentActivity : AppCompatActivity() {
         val title = intent.extras?.getString(ARG_TITLE)
 
         with(binding) {
-            setSupportActionBar(toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
             setTitle(title)
-            webView.loadUrl(url.orEmpty())
+            webView.apply {
+                webChromeClient = WebChromeClient()
+                webViewClient = WebViewClient()
+                loadUrl(url.orEmpty())
+            }
             btnAccept.apply {
                 show(allow)
-
                 setOnClickListener {
                     setResult(RESULT_OK)
+                    finish()
                 }
             }
 
@@ -53,9 +63,23 @@ class DocumentActivity : AppCompatActivity() {
 
                 setOnClickListener {
                     setResult(RESULT_CANCELED)
+                    finish()
                 }
             }
         }
+
+        onBackPressedDispatcher.addCallback(
+            this /* lifecycle owner */,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    finish()
+                }
+            })
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
 }

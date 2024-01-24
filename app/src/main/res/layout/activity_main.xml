@@ -42,4 +42,11 @@
         android:text="Get Documents"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnShowDocument"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Document"
+        app:layout_constraintTop_toBottomOf="@+id/btnGetDocuments" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

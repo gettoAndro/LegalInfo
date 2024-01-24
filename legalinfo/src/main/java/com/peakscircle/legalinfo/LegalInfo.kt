@@ -3,7 +3,9 @@ package com.peakscircle.legalinfo
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.peakscircle.legalinfo.data.Api
+import com.peakscircle.legalinfo.data.dto.response.GetDocumentsResponseDTO
 import com.peakscircle.legalinfo.domain.LegalInfoRepository
+import com.peakscircle.legalinfo.domain.NetworkResult
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -58,11 +60,25 @@ class LegalInfo {
         repository = LegalInfoRepository(api)
     }
 
-    suspend fun register(userId: String) = repository.register(userId)
+    suspend fun register(userId: String): NetworkResult<*> {
+        if (userId.isBlank()) return NetworkResult.Error(WrongIdException())
+        if (::api.isInitialized && ::repository.isInitialized) {
+            return repository.register(userId)
+        }
 
-    suspend fun getDocuments(userId: String, type: DocumentType, customType: String? = null) =
-        repository.getDocuments(userId, type, customType)
+        return NetworkResult.Error(NotConfiguredException())
+    }
 
-    fun showDocument()
+    suspend fun getDocuments(userId: String, type: DocumentType, customType: String? = null): NetworkResult<GetDocumentsResponseDTO> {
+        if (userId.isBlank()) return NetworkResult.Error(WrongIdException())
+        if (::api.isInitialized && ::repository.isInitialized) {
+            return repository.getDocuments(userId, type, customType)
+        }
 
+        return NetworkResult.Error(NotConfiguredException())
+    }
+
+
+    class NotConfiguredException : Exception("NOT_CONFIGURED")
+    class WrongIdException : Exception("WRONG_ID")
 }

@@ -11,5 +11,5 @@ data class DocumentDTO(
     val url: String,
     val version: String,
     val created: String,
-    val accepted: Boolean?
+    val accepted: String?
 )

@@ -2,6 +2,7 @@ package com.peakscircle.legalinfodemo.ui.common
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.peakscircle.legalinfodemo.ui.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,5 +18,6 @@ abstract class BaseViewModel: ViewModel() {
     protected val scope = CoroutineScope(coroutineContext)
 
     val loadingLive = MutableLiveData<Boolean>()
+    val messageLive = SingleLiveEvent<String>()
 
 }
