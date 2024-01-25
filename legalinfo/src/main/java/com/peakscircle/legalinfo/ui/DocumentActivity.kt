@@ -3,12 +3,9 @@ package com.peakscircle.legalinfo.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.peakscircle.legalinfo.databinding.ActivityDocumentBinding
 import com.peakscircle.legalinfo.ui.utils.ext.show
@@ -65,8 +62,7 @@ class DocumentActivity : AppCompatActivity() {
             }
         }
 
-        onBackPressedDispatcher.addCallback(
-            this /* lifecycle owner */,
+        onBackPressedDispatcher.addCallback(this,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     finish()
