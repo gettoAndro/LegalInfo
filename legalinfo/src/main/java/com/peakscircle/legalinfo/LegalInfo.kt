@@ -61,8 +61,8 @@ class LegalInfo {
     }
 
     suspend fun register(userId: String): NetworkResult<*> {
-        if (userId.isBlank()) return NetworkResult.Error(WrongIdException())
-        if (::api.isInitialized && ::repository.isInitialized) {
+        if (checkId(userId)) return NetworkResult.Error(WrongIdException())
+        if (isConfigured()) {
             return repository.register(userId)
         }
 
@@ -70,13 +70,25 @@ class LegalInfo {
     }
 
     suspend fun getDocuments(userId: String, type: DocumentType, customType: String? = null): NetworkResult<GetDocumentsResponseDTO> {
-        if (userId.isBlank()) return NetworkResult.Error(WrongIdException())
-        if (::api.isInitialized && ::repository.isInitialized) {
+        if (checkId(userId)) return NetworkResult.Error(WrongIdException())
+        if (isConfigured()) {
             return repository.getDocuments()
         }
 
         return NetworkResult.Error(NotConfiguredException())
     }
+
+    suspend fun getAcceptedDocuments(userId: String): NetworkResult<GetDocumentsResponseDTO> {
+        if (checkId(userId)) return NetworkResult.Error(WrongIdException())
+        if (isConfigured()) {
+            return repository.getAcceptedDocuments()
+        }
+
+        return NetworkResult.Error(NotConfiguredException())
+    }
+
+    private fun checkId(userId: String) = userId.isBlank()
+    private fun isConfigured() = ::api.isInitialized && ::repository.isInitialized
 
 
     class NotConfiguredException : Exception("NOT_CONFIGURED")

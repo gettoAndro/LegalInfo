@@ -45,26 +45,23 @@ class DocumentActivity : AppCompatActivity() {
         with(binding) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             setTitle(title)
+
             webView.apply {
                 webChromeClient = WebChromeClient()
                 webViewClient = WebViewClient()
                 loadUrl(url.orEmpty())
             }
-            btnAccept.apply {
-                show(allow)
-                setOnClickListener {
-                    setResult(RESULT_OK)
-                    finish()
-                }
+
+            containerActions.show(allow)
+
+            btnAccept.setOnClickListener {
+                setResult(RESULT_OK)
+                finish()
             }
 
-            btnCancel.apply {
-                show(allow)
-
-                setOnClickListener {
-                    setResult(RESULT_CANCELED)
-                    finish()
-                }
+            btnCancel.setOnClickListener {
+                setResult(RESULT_CANCELED)
+                finish()
             }
         }
 

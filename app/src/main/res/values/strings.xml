@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Legal Info Demo</string>
+    <string name="host_url">Host Url</string>
+    <string name="host_url_value">https://31934ccb-4d27-4c26-8c2f-2948cfebce5c.mock.pstmn.io/</string>
+    <string name="configure">Configure</string>
+    <string name="userid">userId</string>
+    <string name="register">Register</string>
+    <string name="get_documents">Get Documents</string>
+    <string name="get_accepted_documents">Get Accepted Documents</string>
 </resources>

@@ -6,12 +6,14 @@ import com.peakscircle.legalinfo.data.dto.response.DocumentDTO
 import com.peakscircle.legalinfo.domain.NetworkResult
 import com.peakscircle.legalinfodemo.BuildConfig
 import com.peakscircle.legalinfodemo.ui.common.BaseViewModel
+import com.peakscircle.legalinfodemo.ui.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class MainViewModel : BaseViewModel() {
 
-    private var documents = emptyList<DocumentDTO>()
+    val documents = SingleLiveEvent<List<DocumentDTO>>()
+    val acceptedDocuments = SingleLiveEvent<List<DocumentDTO>>()
     fun configure(hostUrl: String) {
         LegalInfo.getInstance().configure(hostUrl, BuildConfig.DEBUG)
         messageLive.postValue("Configured")
@@ -37,7 +39,7 @@ class MainViewModel : BaseViewModel() {
                 loadingLive.postValue(false)
                 when (it) {
                     is NetworkResult.Success -> {
-                        documents = it.response.data
+                        documents.postValue(it.response.data)
                     }
 
                     is NetworkResult.Error -> messageLive.postValue(it.exception.message)
@@ -46,7 +48,19 @@ class MainViewModel : BaseViewModel() {
         }
     }
 
-    fun getFirstDocument() =
-        runCatching { documents.first() }.onFailure { Timber.d("Documents is empty") }
+    fun getAcceptedDocuments(userId: String) {
+        scope.launch {
+            loadingLive.postValue(true)
+            LegalInfo.getInstance().getAcceptedDocuments(userId).let {
+                loadingLive.postValue(false)
+                when (it) {
+                    is NetworkResult.Success -> {
+                        acceptedDocuments.postValue(it.response.data)
+                    }
+                    is NetworkResult.Error -> messageLive.postValue(it.exception.message)
+                }
+            }
+        }
+    }
 
 }

@@ -9,15 +9,15 @@
         android:id="@+id/editUrl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Host Url"
-        android:text="https://31934ccb-4d27-4c26-8c2f-2948cfebce5c.mock.pstmn.io/"
+        android:hint="@string/host_url"
+        android:text="@string/host_url_value"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnConfigure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Configure"
+        android:text="@string/configure"
         app:layout_constraintTop_toBottomOf="@+id/editUrl" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -25,28 +25,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:hint="userId"
+        android:hint="@string/userid"
         app:layout_constraintTop_toBottomOf="@+id/btnConfigure" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/register"
         app:layout_constraintTop_toBottomOf="@+id/editUserId" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnGetDocuments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Get Documents"
+        android:text="@string/get_documents"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnShowDocument"
+        android:id="@+id/btnGetAcceptedDocuments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show Document"
+        android:text="@string/get_accepted_documents"
         app:layout_constraintTop_toBottomOf="@+id/btnGetDocuments" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
