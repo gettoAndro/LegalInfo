@@ -11,4 +11,6 @@ class LegalInfoRepository(private val api: Api) : BaseRepository() {
         call { api.getDocuments() }
 
     suspend fun getAcceptedDocuments() = call { api.getAcceptedDocuments() }
+
+    suspend fun acceptDocument() = call { api.acceptDocument() }
 }

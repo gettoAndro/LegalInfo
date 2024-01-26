@@ -20,8 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     private val documentResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                Timber.d("USER ACCEPTED DOCUMENT")
+            when(it.resultCode) {
+                RESULT_OK -> Toast.makeText(this, "Document accepted successfully", Toast.LENGTH_SHORT).show()
+                RESULT_CANCELED -> Toast.makeText(this, "Document cancelled", Toast.LENGTH_SHORT).show()
             }
         }
 

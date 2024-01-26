@@ -17,4 +17,7 @@ interface Api {
     @GET("documents/accepted")
     suspend fun getAcceptedDocuments(): GetDocumentsResponseDTO
 
+    @POST("documents/accept")
+    suspend fun acceptDocument(): Any
+
 }

@@ -87,9 +87,10 @@ class LegalInfo {
         return NetworkResult.Error(NotConfiguredException())
     }
 
+    suspend fun acceptDocument() = repository.acceptDocument()
+
     private fun checkId(userId: String) = userId.isBlank()
     private fun isConfigured() = ::api.isInitialized && ::repository.isInitialized
-
 
     class NotConfiguredException : Exception("NOT_CONFIGURED")
     class WrongIdException : Exception("WRONG_ID")
